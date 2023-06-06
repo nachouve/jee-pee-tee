@@ -1,2 +1,8 @@
-ask-sdk-core==1.17.1
-revChatGPT==0.0.33.5
+ask-sdk-core==1.18.0
+langchain
+#file:///var/task/resources/langchain-0.0.14-py3-none-any.whl
+#https://files.pythonhosted.org/packages/8a/ec/daf5522e47f0a199c9f5366e32bcb101207233bd5eff0cc693d70678431f/gptcache-0.1.29.1.tar.gz
+#https://files.pythonhosted.org/packages/51/53/36e9a28420e3d2eccfa1da518fd090ded1805775e318c131744701761da1/langchain-0.0.140.tar.gz
+openai==0.27.6
+python-dotenv
+requests==2.30.0

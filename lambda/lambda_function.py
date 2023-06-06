@@ -4,6 +4,23 @@
 # Please visit https://alexa.design/cookbook for additional examples on
 # implementing Alexa features!
 import dotenv
+import os
+import sys
+
+### Add LOCAL lamdba/site-packages dependencies
+import os
+import sys
+# Find the absolute path to the lambda/site-packages directory
+CURRENT_PATH = os.path.dirname(os.path.abspath(__file__))
+site_packages_dir = os.path.join(CURRENT_PATH, 'site-packages')
+
+# Add the site packages directory to the Python path
+sys.path.insert(0, site_packages_dir)
+
+print(sys.path)
+########################################################
+
+
 import json
 import logging
 
@@ -15,6 +32,45 @@ from ask_sdk_core.dispatch_components import (
 from ask_sdk_core.handler_input import HandlerInput
 from ask_sdk_core.skill_builder import SkillBuilder
 from ask_sdk_model import Response
+
+##############################################################
+import pkgutil
+
+
+import importlib
+
+def check_module_installed(module_name):
+    modules = [module for module in pkgutil.iter_modules()]
+    msg = ""
+    #msg = f"""MODULES: {modules}\n"""
+
+    try:
+        module = importlib.import_module(module_name)
+        version = "????"
+        print(f"Module name: {module_name}    Module: [{module}]")
+        msg += f"The module '{module_name}' is installed! \n"
+        if hasattr(module, '__version__'):
+            version = module.__version__
+            msg += f"{module_name}.__version__: {version} \n"
+        msg += f"dir():  {dir(module)}"
+    except ImportError:
+        msg += f"The module '{module_name}' is not installed"
+
+    msg += f"pwd: {os.getcwd()}\n"
+    msg += f"sys.path: {sys.path}\n"
+    msg += f"os.listdir(os.getcwd()) {os.listdir(os.getcwd())}"
+    for i in os.listdir(os.getcwd()):
+        if os.path.isdir(i):
+            msg += f"\tos.listdir('{os.getcwd()}/{i}'): {os.listdir(os.getcwd()+'/'+i)} \n"
+
+    raise(Exception(msg))
+
+check_module_installed("langchain")
+#check_module_installed("langchain.memory")
+#################################################################
+
+from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
+from langchain.memory import ConversationBufferWindowMemory
 #from revChatGPT.revChatGPT import Chatbot
 from chatbot import Chatbot
 from utils import load_config

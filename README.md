@@ -2,11 +2,20 @@
 
 An Alexa Skill to interface with chat.openai.com. Ask a question and get answered with Alexa's soothing voice and GPT body of knowledge.
 
+Project Forked from [paulotruta/trjee-pee-tee](https://github.com/paulotruta/jee-pee-tee)
+
+
+Changes:
+
+- Remove "revChatGPT" dependency
+- Use langchain and openai libraries
+
+
 ## Setup
 
 1. Copy `config.example.json` to `config.json`
-2. Get an OpenAI Session Token. Copy the cookie `__Secure-next-auth.session-token` from the `https://chat.openai.com` domain.
-3. Add this token to the file `config.json` under `session_token`.
+2. Get an OpenAI api key from `https://platform.openai.com`.
+3. Add this token to the file `.env` (or directly on a environment varibale) under `OPENAI_API_KEY`.
 4. Zip this repository (to later import it in the Alexa Developer Console).
 5. Create a new Alexa Skill in the Alexa Developer Console.
 6. Go in the Code tab of the Alexa Developer Console and click "Import Code".
