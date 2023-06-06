@@ -3,7 +3,6 @@
 # chatGPT Alexa skill using the Alexa Skills Kit SDK for Python.
 # Please visit https://alexa.design/cookbook for additional examples on
 # implementing Alexa features!
-import dotenv
 import os
 import sys
 
@@ -24,19 +23,9 @@ print(sys.path)
 import json
 import logging
 
-from ask_sdk_core import utils as ask_utils
-from ask_sdk_core.dispatch_components import (
-    AbstractExceptionHandler,
-    AbstractRequestHandler,
-)
-from ask_sdk_core.handler_input import HandlerInput
-from ask_sdk_core.skill_builder import SkillBuilder
-from ask_sdk_model import Response
 
 ##############################################################
 import pkgutil
-
-
 import importlib
 
 def check_module_installed(module_name):
@@ -69,6 +58,20 @@ check_module_installed("langchain")
 #check_module_installed("langchain.memory")
 #################################################################
 
+from ask_sdk_core import utils as ask_utils
+from ask_sdk_core.dispatch_components import (
+    AbstractExceptionHandler,
+    AbstractRequestHandler,
+)
+from ask_sdk_core.handler_input import HandlerInput
+from ask_sdk_core.skill_builder import SkillBuilder
+from ask_sdk_model import Response
+
+import dotenv
+# loads .env file with your OPENAI_API_KEY
+dotenv.load_dotenv()
+#config = load_config()
+
 from langchain import OpenAI, ConversationChain, LLMChain, PromptTemplate
 from langchain.memory import ConversationBufferWindowMemory
 #from revChatGPT.revChatGPT import Chatbot
@@ -77,10 +80,6 @@ from utils import load_config
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
-# loads .env file with your OPENAI_API_KEY
-dotenv.load_dotenv()
-#config = load_config()
 
 # Set up ChatGPT
 #chatbot = Chatbot(config)
